@@ -2,13 +2,9 @@ import { useState } from "react"
 
 function Items({prop, propTwo, propFunc}){
 
-    const [itemBought, setBought] =useState(false)
-
     function handleBuy(arg1){
-        if(arg1.quantity > 0 && !itemBought){
+        if(arg1.quantity > 0){
             const newQuantity = arg1.quantity - 1
-
-            setBought(!itemBought)
 
             console.log(newQuantity)
 
@@ -36,7 +32,7 @@ function Items({prop, propTwo, propFunc}){
                         <p className="font-bold">$ {datum.price}</p>
                         <p className="font-bold">{(datum.price/propTwo[0].price).toFixed(4)} XMR</p>
                         <p className="font-bold">Number for Sale: {datum.quantity}</p>
-                        <button onClick={()=>handleBuy(datum)}className="bg-blue-300 p-2 rounded-xl">
+                        <button onClick={()=>handleBuy(datum)}className="bg-blue-300 p-2 rounded-xl hover:bg-green-300">
                             {datum.quantity>0 ? "Buy": "Sold Out"}
                         </button>
                     </div>

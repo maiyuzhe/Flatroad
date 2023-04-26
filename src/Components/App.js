@@ -2,8 +2,10 @@ import Home from "./Home";
 import { Route, Routes, useLocation } from "react-router-dom";
 import Page1 from "./Page1";
 import Page2 from "./Page2";
-import NavBar from "./NavBar";
+import NavBar from "./NavBar/NavBar";
 import { useEffect, useState } from "react";
+import LogInPage from "./LogInPage";
+import SignUp from "./SignUp";
 
 function App() {
 
@@ -12,6 +14,12 @@ function App() {
   const [exchangeRate, setRate] = useState([{"price":1}])
 
   const [userOrders, setOrders] = useState([])
+
+  const [loggedIn, setLogin] = useState(true)
+
+  const [account, setAccount] = useState(true)
+
+  const [signUp , setStatus] = useState(true)
 
   const pageLoc = useLocation().pathname
 
@@ -46,26 +54,45 @@ function App() {
       name: arg1.name,
       description: arg1.description,
       price: arg1.price
-  }
+    }
     fetch('http://localhost:3001/orders', {
       method: "POST",
       headers: {
           "Content-Type": "application/json"
       },
       body: JSON.stringify(newOrder)
-  })
+    })
+  }
+
+  function handleLogin(){
+    setLogin(!loggedIn)
+    setAccount(!account)
+  }
+
+  function newAccount(){
+    setStatus(!signUp)
   }
 
   return (
-    <div>
-      <NavBar/>
-      <Routes location={pageLoc}>
-          <Route path="/" element={<Home prop={marketplace} propTwo={exchangeRate} propFunc={handleBuyItem}/>}/>
-          <Route path="/page1" element={<Page1 propFunc={updateMarketplace} />}/>
-          <Route path="/page2" element={<Page2 prop={userOrders} propTwo={exchangeRate}/>}/>
-      </Routes>
-    </div>
-  );
+      <div>
+        <div className={!signUp || !account ? "invisible" : ""}>
+          <LogInPage propFunc={handleLogin} propFuncTwo={newAccount}/>
+        </div>
+        <div className={signUp ? "invisible" : ""}>
+          <Routes>
+            <Route path="/signup" element={<SignUp propFuncTwo={newAccount}/>} />
+          </Routes>
+        </div>
+        <div className={account ? "invisible" : ""}>
+          <NavBar/>
+          <Routes location={pageLoc}>
+              <Route path="/" element={<Home prop={marketplace} propTwo={exchangeRate} propFunc={handleBuyItem}/>}/>
+              <Route path="/page1" element={<Page1 propFunc={updateMarketplace} />}/>
+              <Route path="/page2" element={<Page2 prop={userOrders} propTwo={exchangeRate}/>}/>
+              
+          </Routes>
+        </div>
+      </div>);
 }
 
 export default App;
