@@ -1,0 +1,16 @@
+{
+    "marketplace":[
+        {
+            "image": "https://grandpajoescandyshop.com/wp-content/uploads/2022/01/PEZ-Loose-Bulk-Single-Flavor-Strawberry-JPEG-Image.jpg",
+            "name": "Hard Drugs",
+            "description": "These things will have you reconsidering the sanctity of life",
+            "price": "10"
+        },
+        {
+            "image": "https://m.media-amazon.com/images/I/71Pox8VmyKL.jpg",
+            "name": "Assault Weapon",
+            "description": "We need these dangerous weapons of war off our streets",
+            "price": "1000"
+        }
+    ]
+}
