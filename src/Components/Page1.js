@@ -23,7 +23,7 @@ function Page1({propFunc}){
     }
 
     return (
-        <div>
+        <div className="m-10 flex-none object-center item-center">
             <h2>User Account</h2>
             <form onSubmit={handleSubmit}>
                 <input name="image" placeholder="Image"></input>

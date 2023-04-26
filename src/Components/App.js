@@ -6,6 +6,7 @@ import NavBar from "./NavBar/NavBar";
 import { useEffect, useState } from "react";
 import LogInPage from "./LogInPage";
 import SignUp from "./SignUp";
+import Wallet from "./Wallet";
 
 function App() {
 
@@ -20,6 +21,8 @@ function App() {
   const [account, setAccount] = useState(true)
 
   const [signUp , setStatus] = useState(true)
+
+  const [users, setUsers] = useState([])
 
   const pageLoc = useLocation().pathname
 
@@ -39,6 +42,12 @@ function App() {
     fetch('https://data.binance.com/api/v3/ticker/price')
     .then(res=> res.json())
     .then(data => setRate(data.filter(datum => datum.symbol === "XMRUSDT")))
+  }, [])
+
+  useEffect(()=>{
+    fetch('http://localhost:3001/users')
+    .then(res=>res.json())
+    .then(data => setUsers([...data]))
   }, [])
 
   function updateMarketplace(arg1){
@@ -89,7 +98,7 @@ function App() {
               <Route path="/" element={<Home prop={marketplace} propTwo={exchangeRate} propFunc={handleBuyItem}/>}/>
               <Route path="/page1" element={<Page1 propFunc={updateMarketplace} />}/>
               <Route path="/page2" element={<Page2 prop={userOrders} propTwo={exchangeRate}/>}/>
-              
+              <Route path="/wallet" element={<Wallet prop={users}/>} />
           </Routes>
         </div>
       </div>);
