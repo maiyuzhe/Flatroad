@@ -1,4 +1,4 @@
-function Page1(){
+function Page1({propFunc}){
 
     function handleSubmit(e){
         e.preventDefault()
@@ -7,6 +7,7 @@ function Page1(){
             name: e.target.name.value,
             description: e.target.description.value,
             price: e.target.price.value,
+            quantity: e.target.quantity.value
         }
         console.log(newItem)
         fetch('http://localhost:3001/marketplace', {
@@ -16,6 +17,9 @@ function Page1(){
             },
             body: JSON.stringify(newItem)
         })
+        .then(res=>res.json())
+        .then(data=> propFunc(data))
+        e.target.reset()
     }
 
     return (
@@ -25,7 +29,8 @@ function Page1(){
                 <input name="image" placeholder="Image"></input>
                 <input name="name" placeholder="Name"></input>
                 <input name="description" placeholder="Description"></input>
-                <input name="price" placeholder="Price"></input>
+                <input name="price" placeholder="Price" type="number"></input>
+                <input name="quantity" placeholder="Quantity" type="number"></input>
                 <button>Submit Entry</button>
             </form>
         </div>

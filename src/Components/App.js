@@ -11,6 +11,8 @@ function App() {
 
   const [exchangeRate, setRate] = useState([{"price":1}])
 
+  const [userOrders, setOrders] = useState([])
+
   const pageLoc = useLocation().pathname
 
   useEffect(() => {
@@ -19,19 +21,48 @@ function App() {
     .then(data => setMarketplace(data))
   }, [])
 
+  useEffect(()=> {
+    fetch('http://localhost:3001/orders')
+    .then(res=> res.json())
+    .then(data=> setOrders(data))
+  }, [])
+
   useEffect(() => {
     fetch('https://data.binance.com/api/v3/ticker/price')
     .then(res=> res.json())
     .then(data => setRate(data.filter(datum => datum.symbol === "XMRUSDT")))
   }, [])
 
+  function updateMarketplace(arg1){
+    setMarketplace([...marketplace, arg1])
+  }
+
+  function handleBuyItem(arg1){
+    const newItems = marketplace.filter(item=> item.id !== arg1.id)
+    setMarketplace([arg1,...newItems])
+    setOrders([arg1, ...userOrders])
+    const newOrder = {
+      image: arg1.image,
+      name: arg1.name,
+      description: arg1.description,
+      price: arg1.price
+  }
+    fetch('http://localhost:3001/orders', {
+      method: "POST",
+      headers: {
+          "Content-Type": "application/json"
+      },
+      body: JSON.stringify(newOrder)
+  })
+  }
+
   return (
     <div>
       <NavBar/>
       <Routes location={pageLoc}>
-          <Route path="/" element={<Home prop={marketplace} propTwo={exchangeRate}/>}/>
-          <Route path="/page1" element={<Page1/>}/>
-          <Route path="/page2" element={<Page2/>}/>
+          <Route path="/" element={<Home prop={marketplace} propTwo={exchangeRate} propFunc={handleBuyItem}/>}/>
+          <Route path="/page1" element={<Page1 propFunc={updateMarketplace} />}/>
+          <Route path="/page2" element={<Page2 prop={userOrders} propTwo={exchangeRate}/>}/>
       </Routes>
     </div>
   );

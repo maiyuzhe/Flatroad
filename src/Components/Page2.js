@@ -1,6 +1,11 @@
-function Page2(){
+import Items from "./Items"
+
+function Page2({prop, propTwo}){
     return (
-        <h2>Orders</h2>
+        <div>
+            <h2>Orders</h2>
+            <Items prop={prop} propTwo={propTwo}/>
+        </div>
     )
 }
 
