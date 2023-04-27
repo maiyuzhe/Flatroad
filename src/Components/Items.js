@@ -1,12 +1,8 @@
-import { useState } from "react"
-
 function Items({prop, propTwo, propFunc}){
 
     function handleBuy(arg1){
         if(arg1.quantity > 0){
             const newQuantity = arg1.quantity - 1
-
-            console.log(newQuantity)
 
             fetch(`http://localhost:3001/marketplace/${arg1.id}`, {
                 method: "PATCH",

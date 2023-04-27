@@ -21,7 +21,7 @@
       "name": "Black Tar Heroin",
       "description": "Oof",
       "price": "60",
-      "quantity": 3,
+      "quantity": 0,
       "id": 3
     },
     {
@@ -49,6 +49,12 @@
       "password": "something",
       "id": 1,
       "wallet": 10000
+    },
+    {
+      "username": "michael",
+      "email": "michaelisabeast@beastmail.org",
+      "password": "password",
+      "id": 2
     }
   ]
 }

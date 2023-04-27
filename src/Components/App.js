@@ -10,6 +10,8 @@ import Wallet from "./Wallet";
 
 function App() {
 
+  const [currentUser, setCurrentUser] = useState(["dev", 10])
+
   const [marketplace, setMarketplace] = useState([])
 
   const [exchangeRate, setRate] = useState([{"price":1}])
@@ -73,32 +75,43 @@ function App() {
     })
   }
 
-  function handleLogin(){
-    setLogin(!loggedIn)
-    setAccount(!account)
+  function handleLogin(arg1){
+    const newUser = users.filter(user => arg1.username === user.username)
+    .filter(user => arg1.password === user.password)
+
+    if(newUser.length === 1 ){
+      setLogin(!loggedIn)
+      setCurrentUser([arg1.username, arg1.wallet])
+      setAccount(!account)
+    }
+    else{alert("Username or Password Incorrect")}
   }
 
-  function newAccount(){
-    setStatus(!signUp)
+  function newAccount(arg1){
+    if(arg1===undefined){setStatus(!signUp)}
+    else{
+      setStatus(!signUp)
+      setUsers([...users, arg1])
+    }
   }
 
   return (
       <div>
-        <div className={!signUp || !account ? "invisible" : ""}>
+        <div className={!signUp || !account ? "hidden" : ""}>
           <LogInPage propFunc={handleLogin} propFuncTwo={newAccount}/>
         </div>
-        <div className={signUp ? "invisible" : ""}>
+        <div className={signUp ? "hidden" : ""}>
           <Routes>
             <Route path="/signup" element={<SignUp propFuncTwo={newAccount}/>} />
           </Routes>
         </div>
-        <div className={account ? "invisible" : ""}>
-          <NavBar/>
+        <div className={account ? "hidden" : ""}>
+          <NavBar propFunc={handleLogin}/>
           <Routes location={pageLoc}>
-              <Route path="/" element={<Home prop={marketplace} propTwo={exchangeRate} propFunc={handleBuyItem}/>}/>
+              <Route path="/" element={<Home prop={marketplace} propTwo={exchangeRate} propThree={currentUser} propFunc={handleBuyItem}/>}/>
               <Route path="/page1" element={<Page1 propFunc={updateMarketplace} />}/>
               <Route path="/page2" element={<Page2 prop={userOrders} propTwo={exchangeRate}/>}/>
-              <Route path="/wallet" element={<Wallet prop={users}/>} />
+              <Route path="/wallet" element={<Wallet prop={currentUser}/>} />
           </Routes>
         </div>
       </div>);

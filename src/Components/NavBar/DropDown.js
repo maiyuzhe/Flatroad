@@ -6,7 +6,12 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-function DropDown() {
+function DropDown({propFunc}) {
+
+  function handleLogOut(){
+    propFunc()
+  }
+
   return (
     <Menu as="div" className="relative inline-block text-left">
       <div>
@@ -49,6 +54,32 @@ function DropDown() {
                   )}
                 >
                   Monero Wallet
+                </Link>
+              )}
+            </Menu.Item>
+            <Menu.Item>
+              {({ active }) => (
+                <Link
+                  to = "/wallet"
+                  className={classNames(
+                    active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                    'block px-4 py-2 text-sm'
+                  )}
+                >
+                  Your Items
+                </Link>
+              )}
+            </Menu.Item>
+            <Menu.Item>
+              {({ active }) => (
+                <Link
+                  onClick={handleLogOut}
+                  className={classNames(
+                    active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                    'block px-4 py-2 text-sm'
+                  )}
+                >
+                  Log Out
                 </Link>
               )}
             </Menu.Item>

@@ -2,18 +2,25 @@ import { Link } from "react-router-dom"
 
 function LogInPage({propFunc, propFuncTwo}){
 
+    function handleForm(e){
+        const loginInfo = {
+            username: e.target.username.value,
+            password: e.target.password.value
+        }
+        e.preventDefault()
+        propFunc(loginInfo)
+        e.target.reset()
+    }
+
     return (
-        <div className="flex-auto justify-content-center">
+        <div className="m-5 p-10 bg-green-300 flex-row w-64 rounded-xl justify-center">
             <div>
-                <form>
+                <form onSubmit={handleForm}>
                     <label>Username</label>
-                    <input type="text"></input>
+                    <input name="username"></input>
                     <label>Password</label>
-                    <input type="password"></input>
-                    <button onClick={(e) => {
-                        e.preventDefault()
-                        propFunc()
-                        }}>Sign In</button>
+                    <input type="password" name="password"></input>
+                    <button>Sign In</button>
                 </form>
                 <Link to="/signup" onClick={() => propFuncTwo()}>Sign Up</Link>
             </div>
