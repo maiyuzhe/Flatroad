@@ -1,44 +1,40 @@
 {
   "marketplace": [
     {
-      "image": "https://grandpajoescandyshop.com/wp-content/uploads/2022/01/PEZ-Loose-Bulk-Single-Flavor-Strawberry-JPEG-Image.jpg",
-      "name": "Hard Drugs",
-      "description": "These things will have you reconsidering the sanctity of life",
+      "image": "https://www.lovethispic.com/uploaded_images/131724-Pez-Candy.jpg",
+      "name": "Pez",
+      "description": "my favorite childhood candy",
       "price": "10",
-      "quantity": 0,
+      "quantity": 1,
+      "seller": "michael",
       "id": 1
     },
     {
       "image": "https://m.media-amazon.com/images/I/71Pox8VmyKL.jpg",
-      "name": "Assault Weapon",
-      "description": "We need these dangerous weapons of war off our streets",
-      "price": "1000",
-      "quantity": 0,
+      "name": "Nerf Gun",
+      "description": "A fun little shooty toy",
+      "price": "20",
+      "quantity": 1,
+      "seller": "bob",
       "id": 2
     },
     {
-      "image": "https://m.media-amazon.com/images/I/51cMtdEWQYL._AC_SX522_.jpg",
-      "name": "Black Tar Heroin",
-      "description": "Oof",
-      "price": "60",
-      "quantity": 0,
-      "id": 3
-    },
-    {
       "image": "https://atkinsonsofvancouver.com/us/media/opti_image/webp/catalog/product/cache/1539c5e06e9af453096780cf0cffee92/i/o/iona-butter-spreader-by-robert-welch28155.webp",
-      "name": "Butter Knife  - London Special (Incredibly Dangerous)",
-      "description": "Oi m8? u got a loicense fo dat fing?",
+      "name": "Butter Knife",
+      "description": "You need a license to own this in the UK",
       "price": "20",
       "quantity": 1,
+      "seller": "cliff",
       "id": 4
     }
   ],
   "orders": [
     {
-      "image": "https://m.media-amazon.com/images/I/51cMtdEWQYL._AC_SX522_.jpg",
-      "name": "Black Tar Heroin",
-      "description": "Oof",
-      "price": "60",
+      "image": "https://www.lovethispic.com/uploaded_images/131724-Pez-Candy.jpg",
+      "name": "Pez",
+      "description": "my favorite childhood candy",
+      "price": "10",
+      "buyer": "michael",
       "id": 1
     }
   ],
@@ -55,6 +51,12 @@
       "email": "michaelisabeast@beastmail.org",
       "password": "password",
       "id": 2
+    },
+    {
+      "username": "LUNA",
+      "email": "luna@luna.com",
+      "password": "password",
+      "id": 3
     }
   ]
 }
