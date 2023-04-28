@@ -38,7 +38,7 @@ function App() {
   useEffect(()=> {
     fetch('http://localhost:3001/orders')
     .then(res=> res.json())
-    .then(data=> setOrders(data.filter(datum => datum.buyer === currentUser[0])))
+    .then(data=> setOrders(data))
   }, [])
 
   useEffect(() => {
@@ -66,6 +66,7 @@ function App() {
       name: arg1.name,
       description: arg1.description,
       price: arg1.price,
+      seller: arg1.seller,
       buyer: currentUser[0]
     }
     fetch('http://localhost:3001/orders', {
@@ -99,6 +100,8 @@ function App() {
 
   const userStore = marketplace.filter(item => item.seller === currentUser[0])
 
+  const myOrders = userOrders.filter(item => item.buyer === currentUser[0])
+
   return (
       <div>
         <div className={!signUp || !account ? "hidden" : ""}>
@@ -114,9 +117,9 @@ function App() {
           <Routes location={pageLoc}>
               <Route path="/" element={<Home prop={marketplace} propTwo={exchangeRate} propThree={currentUser} propFunc={handleBuyItem}/>}/>
               <Route path="/page1" element={<Page1 propFunc={updateMarketplace} prop={currentUser}/>}/>
-              <Route path="/page2" element={<Page2 prop={userOrders} propTwo={exchangeRate}/>}/>
+              <Route path="/page2" element={<Page2 prop={myOrders} propTwo={exchangeRate}/>}/>
               <Route path="/wallet" element={<Wallet prop={currentUser}/>} />
-              <Route path="/user-store" element={<YourStore prop={userStore} propTwo={exchangeRate}/>} />
+              <Route path="/user-store" element={<YourStore prop={userStore} propTwo={exchangeRate} propThree={currentUser}/>} />
           </Routes>
         </div>
       </div>);
