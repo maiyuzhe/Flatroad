@@ -18,7 +18,7 @@ function Items({prop, propTwo, propFunc}){
     }
 
     return (
-        <div className="m-10 inline-flex object-center item-start">
+        <div className="m-10 flex flex-wrap flex-row object-center">
             {prop.map(datum => {
                 return (
                     <div key={datum.name} className='m-5 p-10 bg-green-300 flex-row w-64 hover:bg-red-300 rounded-xl justify-center'>
