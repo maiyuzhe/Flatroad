@@ -25,18 +25,20 @@ function SignUp({propFuncTwo}){
     }
 
     return (
-    <div className="m-5 p-10 bg-green-300 flex-row w-64 rounded-xl justify-center">
-        <form onSubmit={handleForm}>
-            <label>Email</label>
-            <input name="email" type="email"></input>
-            <label>Username</label>
-            <input name="username" type="text"></input>
-            <label>Password</label>
-            <input name="password" type="password"></input>
-            <button>Create Account</button>
-        </form>
-        <Link to="/" onClick={() => propFuncTwo()}>Login</Link>
-    </div>
+        <div className="flex justify-center ">
+            <div className="m-5 p-10 bg-green-300 flex-row w-64 rounded-xl justify-center">
+                <form onSubmit={handleForm}>
+                    <label>Email</label>
+                    <input name="email" type="email"></input>
+                    <label>Username</label>
+                    <input name="username" type="text"></input>
+                    <label>Password</label>
+                    <input name="password" type="password"></input>
+                    <button>Create Account</button>
+                </form>
+                <Link to="/" onClick={() => propFuncTwo()}>Login</Link>
+            </div>
+        </div>
     )
 }
 
