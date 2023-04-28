@@ -1,4 +1,4 @@
-function Page1({propFunc}){
+function Page1({propFunc, prop}){
 
     function handleSubmit(e){
         e.preventDefault()
@@ -8,7 +8,8 @@ function Page1({propFunc}){
                 name: e.target.name.value,
                 description: e.target.description.value,
                 price: e.target.price.value,
-                quantity: e.target.quantity.value
+                quantity: e.target.quantity.value,
+                user: prop[0]
             }
             console.log(newItem)
             fetch('http://localhost:3001/marketplace', {

@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import LogInPage from "./LogInPage";
 import SignUp from "./SignUp";
 import Wallet from "./Wallet";
+import YourStore from "./YourStore";
 
 function App() {
 
@@ -37,7 +38,7 @@ function App() {
   useEffect(()=> {
     fetch('http://localhost:3001/orders')
     .then(res=> res.json())
-    .then(data=> setOrders(data))
+    .then(data=> setOrders(data.filter(datum => datum.buyer === currentUser[0])))
   }, [])
 
   useEffect(() => {
@@ -64,7 +65,8 @@ function App() {
       image: arg1.image,
       name: arg1.name,
       description: arg1.description,
-      price: arg1.price
+      price: arg1.price,
+      buyer: currentUser[0]
     }
     fetch('http://localhost:3001/orders', {
       method: "POST",
@@ -95,6 +97,8 @@ function App() {
     }
   }
 
+  const userStore = marketplace.filter(item => item.seller === currentUser[0])
+
   return (
       <div>
         <div className={!signUp || !account ? "hidden" : ""}>
@@ -109,9 +113,10 @@ function App() {
           <NavBar propFunc={handleLogin}/>
           <Routes location={pageLoc}>
               <Route path="/" element={<Home prop={marketplace} propTwo={exchangeRate} propThree={currentUser} propFunc={handleBuyItem}/>}/>
-              <Route path="/page1" element={<Page1 propFunc={updateMarketplace} />}/>
+              <Route path="/page1" element={<Page1 propFunc={updateMarketplace} prop={currentUser}/>}/>
               <Route path="/page2" element={<Page2 prop={userOrders} propTwo={exchangeRate}/>}/>
               <Route path="/wallet" element={<Wallet prop={currentUser}/>} />
+              <Route path="/user-store" element={<YourStore prop={userStore} propTwo={exchangeRate}/>} />
           </Routes>
         </div>
       </div>);
